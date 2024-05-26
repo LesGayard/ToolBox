@@ -1,6 +1,12 @@
-# Outils
+# ToolBox
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.1.
+Use of Angular-Calendar from mattlewis92.
+Personal and Profesional Meetings
+Users directory
+Audio and written notes
+Automotive diagnosis
+File generation/upload/download
 
 ## Development server
 
