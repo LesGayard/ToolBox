@@ -1,4 +1,4 @@
-/*import {
+import {
   Component,
   ChangeDetectionStrategy,
   ViewChild,
@@ -15,7 +15,7 @@ import {
   addHours,
 } from 'date-fns';
 import { Subject } from 'rxjs';
-//import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
   CalendarEvent,
   CalendarEventAction,
@@ -23,8 +23,10 @@ import {
   CalendarView,
 } from 'angular-calendar';
 import { EventColor } from 'calendar-utils';
+// @ts-ignore
+import * as events from "node:events";
 
-const colors: Record<string, EventColor> = {
+const {blue, red, yellow}: Record<string, EventColor> = {
   red: {
     primary: '#ad2121',
     secondary: '#FAE3E3',
@@ -54,10 +56,17 @@ const colors: Record<string, EventColor> = {
       }
     `,
   ],
-  templateUrl: 'template.html',
+  templateUrl: 'app.component.html',
 })
 export class AppComponent {
-  @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
+  get modalData(): { action: string; event: CalendarEvent } | undefined {
+    return this._modalData;
+  }
+
+  set modalData(value: { action: string; event: CalendarEvent }) {
+    this._modalData = value;
+  }
+  @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any> | undefined;
 
   view: CalendarView = CalendarView.Month;
 
@@ -65,10 +74,10 @@ export class AppComponent {
 
   viewDate: Date = new Date();
 
-  modalData: {
+  private _modalData: {
     action: string;
     event: CalendarEvent;
-  };
+  } | undefined;
 
   actions: CalendarEventAction[] = [
     {
@@ -95,7 +104,7 @@ export class AppComponent {
       start: subDays(startOfDay(new Date()), 1),
       end: addDays(new Date(), 1),
       title: 'A 3 day event',
-      color: { ...colors.red },
+      color: { ...(red) },
       actions: this.actions,
       allDay: true,
       resizable: {
@@ -107,21 +116,21 @@ export class AppComponent {
     {
       start: startOfDay(new Date()),
       title: 'An event with no end date',
-      color: { ...colors.yellow },
+      color: { ...(yellow) },
       actions: this.actions,
     },
     {
       start: subDays(endOfMonth(new Date()), 3),
       end: addDays(endOfMonth(new Date()), 3),
       title: 'A long event that spans 2 months',
-      color: { ...colors.blue },
+      color: { ...(blue) },
       allDay: true,
     },
     {
       start: addHours(startOfDay(new Date()), 2),
       end: addHours(new Date(), 2),
       title: 'A draggable and resizable event',
-      color: { ...colors.yellow },
+      color: { ...(yellow) },
       actions: this.actions,
       resizable: {
         beforeStart: true,
@@ -168,7 +177,7 @@ export class AppComponent {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
+    this._modalData = { event, action };
     this.modal.open(this.modalContent, { size: 'lg' });
   }
 
@@ -179,7 +188,7 @@ export class AppComponent {
         title: 'New event',
         start: startOfDay(new Date()),
         end: endOfDay(new Date()),
-        color: colors.red,
+        color: red,
         draggable: true,
         resizable: {
           beforeStart: true,
@@ -200,4 +209,4 @@ export class AppComponent {
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
   }
-}*/
+}
