@@ -36,6 +36,7 @@ export class AppComponent {
     initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
     weekends: true,
     editable: true,
+    /******** TO DO: CHANGE THE MOUSE WHEN SELECTED FOCUS... **************/
     selectable: true,
     selectMirror: true,
     dayMaxEvents: true,
@@ -62,6 +63,7 @@ export class AppComponent {
     calendarOptions.weekends = !calendarOptions.weekends;
   }
 
+  /***************** TO DO: TO CHANGE *****/
   handleDateSelect(selectInfo: DateSelectArg) {
     const title = prompt('Please enter a new title for your event');
     const calendarApi = selectInfo.view.calendar;
@@ -78,6 +80,8 @@ export class AppComponent {
       });
     }
   }
+
+
 
   handleEventClick(clickInfo: EventClickArg) {
     if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
