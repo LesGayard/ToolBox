@@ -7,6 +7,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import { INITIAL_EVENTS, createEventId } from './event-utils';
 import {FullCalendarModule} from "@fullcalendar/angular";
+import {MenuComponent} from "./menu/menu.component";
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ import {FullCalendarModule} from "@fullcalendar/angular";
   standalone: true,
   imports: [
     FullCalendarModule,
-    CommonModule
+    CommonModule,
+    MenuComponent
   ],
   styleUrls: ['./app.component.css']
 })

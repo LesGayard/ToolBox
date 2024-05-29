@@ -19,8 +19,6 @@ import {AppComponent} from "./app.component";
     CommonModule,
     FormsModule,
     NgbModalModule,
-    FlatpickrModule.forRoot(),
-    BrowserAnimationsModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
