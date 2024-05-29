@@ -1,5 +1,5 @@
 import{CommonModule} from "@angular/common";
-import { Component, ChangeDetectorRef } from '@angular/core';
+import {Component, ChangeDetectorRef, ViewChild} from '@angular/core';
 import { CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -21,6 +21,8 @@ import {MenuComponent} from "./menu/menu.component";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  @ViewChild(MenuComponent)
+
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
     plugins: [
